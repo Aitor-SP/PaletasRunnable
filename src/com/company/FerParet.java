@@ -9,6 +9,7 @@ public class FerParet {
         int numMaons = 10, ti;
         final int[] te = new int[1];
         int numPaletes = 5;
+        //Definim l'executor dels processos
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
 
         //instanciem els paletes
@@ -20,11 +21,10 @@ public class FerParet {
         //Donem nom als paletes i els posem a fer fer la paret
         for (int i=0;i<numPaletes;i++) {
             paletaList[i] = new Paleta("Paleta-"+i, numMaons);
-            // POr cada uno de ellos, ejecuto el runable en segundo plano
             Runnable runnable = paletaList[i];
             executor.schedule(runnable,0, TimeUnit.SECONDS);
         }
-
+        //Tanquem l'executor
         executor.shutdown();
 
         Runnable runnable = new Runnable() {
